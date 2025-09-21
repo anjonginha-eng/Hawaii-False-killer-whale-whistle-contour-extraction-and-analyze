@@ -1,0 +1,48 @@
+Copyright © Jong-Min An  
+All rights reserved.  
+The files in this repository are supplied **exclusively for non-commercial, academic use** during peer-review.  
+Any reuse, redistribution, or derivative work must (i) remain non-commercial and (ii) cite the following paper:
+
+--------------------------------------------------------------------
+DATA FILES
+--------------------------------------------------------------------
+1. P1.mat (NWHI)  
+2. P2.mat (Pelagic)
+3. P3.mat (MHI)
+
+Each *.mat* file is a structure array in which every element corresponds to a single extracted whistle contour and contains:
+
+| Field                | Description                                                                    |
+|----------------------|--------------------------------------------------------------------------------|
+| `file_name`          | Name of the original *.flac* file from which the whistle was extracted          |
+| `array`              | Hydrophone-array channel number that recorded the whistle                      |
+| `quality`            | Subjective recording-quality flag assigned during extraction                    |
+| `time`               | Vector of time coordinates (s) describing the whistle’s contour                |
+| `frequency`          | Vector of frequency coordinates (Hz) describing the whistle’s contour          |
+| `sampling_frequency` | Original sampling rate of the *.flac* file (Hz)                                |
+| `resampling_frequency` | Sampling rate (Hz) used for spectrogram generation during extraction         |
+| `Caxis`              | Two-element vector specifying the colour-axis limits applied to the spectrogram|
+
+--------------------------------------------------------------------
+UTILITY SCRIPTS
+--------------------------------------------------------------------
+* **run_whistle_contour_processing.m**  
+  ► Open this file, load either *P1.mat* or *P2.mat*, and run the script.  
+  ► It generates two summary files in the folder **/analysis_result/**:  
+    * `record_p1.mat` – processed metrics for P1 whistles  
+    * `record_p2.mat` – processed metrics for P2 whistles   
+    * `record_p3.mat` – processed metrics for P3 whistles
+
+  The same folder also contains:  
+  * **supplementary_figure_all.m** – draws cumulative-distribution figures for supplementary figure  
+  * **statistical_result.m** – calculates statistical effect sizes (Welch's ANOVA, Cohen’s *d*,  etc.).
+
+--------------------------------------------------------------------
+QUICK START
+--------------------------------------------------------------------
+```matlab
+% Example workflow
+load('P1.mat');                  % or P2.mat
+run_whistle_contour_processing;  % generates /analysis_result/ files
+
+
